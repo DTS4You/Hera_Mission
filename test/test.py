@@ -6,8 +6,8 @@ pix_array = [[ 1, 1, 1, 1],
              [ 0, 1, 2, 3]]
 
 
-for i in range(len(pix_array_01[0])):
-    print(pix_array_01[1][i])
+for i in range(len(pix_array[0])):
+    print(pix_array[1][i])
 
 
 
