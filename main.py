@@ -1,6 +1,6 @@
 ######################################################
 ### Main-Program                                   ###
-### Projekt: Heinrich-Hertz-SAT                    ###
+### Projekt: Hera-Mission                          ###
 ### Version: 1.00                                  ###
 ######################################################
 from machine import Pin, Timer                              # RaspberryPi Pico2040 -> Hardware-Library
