@@ -2,7 +2,7 @@
 # User Button (GPIO24)
 # User LED    (GPIO25)
 
-from machine import Pin, Timer
+from machine import Pin, Timer # type: ignore
  
 led = Pin(25, Pin.OUT)
 Counter = 0
