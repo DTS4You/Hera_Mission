@@ -24,9 +24,9 @@ def main():
             print("Schleife")
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
-        i = 0
     finally:
         print("Exiting the program")
+ 
 
 
 
