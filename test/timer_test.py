@@ -6,18 +6,25 @@ import time # type: ignore
 from machine import Pin, Timer # type: ignore
  
 led = Pin(25, Pin.OUT)
-Counter = 0
-Fun_Num = 0
+
+Counter_1 = 0
+Counter_2 = 0
 
 # ==============================================================================
-# ==============================================================================
 
-def fun(tim):
-    global Counter
-    Counter = Counter + 1
-    print(Counter)
-    led.value(Counter%2)
+def timer_1_call(tim):
+    global Counter_1
+    Counter_1 = Counter_1 + 1
+    print("Timer 1 ", Counter_1)
+    led.value(Counter_1%2)
  
+
+# ==============================================================================
+
+def timer_2_call(tim):
+    global Counter_2
+    Counter_2 = Counter_2 + 1
+    print("Timer 2 ", Counter_2)
 
 # ###############################################################################
 # ### Function ->                                                             ###
@@ -25,25 +32,26 @@ def fun(tim):
 
 def main():
 
-    tim = Timer(-1)
-    tim.init(period=1000, mode=Timer.PERIODIC, callback=fun)
-
-
-    time.sleep(5)
-    tim.deinit()
-    led.value(0)
+    timer_1 = Timer(-1)
+    timer_1.init(period=300, mode=Timer.PERIODIC, callback=timer_1_call)
+    
+    timer_2 = Timer(-1)
+    timer_2.init(period=1000, mode=Timer.PERIODIC, callback=timer_2_call)
 
     try:
         print("Start")
         while(True):
-            time.sleep(0.3)
+            time.sleep(4)
             print("Run")
+
     except KeyboardInterrupt:
-        print("Keyboard Interrupt")
-        # usr_led.value(0)
+        print("-> Keyboard Interrupt")
 
     finally:
-        print("Exiting the program")
+        print("-> Exiting the program")
+        timer_1.deinit()
+        timer_2.deinit()
+        led.value(0)
  
 
     print("=== End of Main ===")
