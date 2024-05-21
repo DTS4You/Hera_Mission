@@ -5,7 +5,7 @@
 import time # type: ignore
 from machine import Pin, Timer # type: ignore
  
-led = Pin(25, Pin.OUT)
+usr_led = Pin(25, Pin.OUT)
 
 Counter_1 = 0
 Counter_2 = 0
@@ -16,7 +16,7 @@ def timer_1_call(tim):
     global Counter_1
     Counter_1 = Counter_1 + 1
     print("Timer 1 ", Counter_1)
-    led.value(Counter_1%2)
+    usr_led.value(Counter_1%2)
  
 
 # ==============================================================================
@@ -51,7 +51,7 @@ def main():
         print("-> Exiting the program")
         timer_1.deinit()
         timer_2.deinit()
-        led.value(0)
+        usr_led.value(0)
  
 
     print("=== End of Main ===")
