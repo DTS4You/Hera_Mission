@@ -13,6 +13,9 @@ class LED_OBJ:
     
     def get_num_pix(self):
         return self.num_pix
+    
+    def set_pos(self, pos):
+        self.pos = pos
 
 
 
