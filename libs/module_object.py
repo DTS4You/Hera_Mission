@@ -4,12 +4,15 @@
 
 class LED_OBJ:
 
-    def __init__(self, num_pix = 0):
+    def __init__(self, num_pix = 0, dir = False):
         
         self.num_pix = num_pix      # Number of LED Pixel
         self.pos = 0                # Position
-        self.dir = False            # False = Left | True = Right
+        self.dir = dir              # False = Left | True = Right
         self.anim = False           # Animation State
+        self.color_off = 0          # Color-Table "OFF"
+        self.color_on = 0           # Color-Table "ON"
+        self.color_anim = 0         # Color-Table "ANIM"
     
     def get_num_pix(self):
         return self.num_pix
@@ -19,6 +22,12 @@ class LED_OBJ:
 
     def get_pos(self):
         return self.pos
+    
+    def anim_step(self):
+        if self.dir == True:
+            print("Step Right")
+        else:
+            print("Step Left")
 
 
 # ------------------------------------------------------------------------------
