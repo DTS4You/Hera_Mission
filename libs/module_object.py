@@ -27,7 +27,7 @@ class LED_OBJ:
 def main():
 
     print("Object -> Setup")
-    led_obj = LED_OBJ(20)
+    led_obj = LED_OBJ(50)
     print("Decode -> Test")
     print("Get -> num_pix = ", led_obj.get_num_pix())
     led_obj.set_pos(20)
