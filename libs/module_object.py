@@ -17,6 +17,8 @@ class LED_OBJ:
     def set_pos(self, pos):
         self.pos = pos
 
+    def get_pos(self):
+        return self.pos
 
 
 # ------------------------------------------------------------------------------
@@ -27,7 +29,9 @@ def main():
     print("Object -> Setup")
     led_obj = LED_OBJ(20)
     print("Decode -> Test")
-    print(led_obj.get_num_pix())
+    print("Get -> num_pix = ", led_obj.get_num_pix())
+    led_obj.set_pos(20)
+    print("Get -> pos = ", led_obj.get_pos())
     print("-----------------------------------")
 
 
