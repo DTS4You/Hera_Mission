@@ -323,20 +323,6 @@ def main():
     print("WS2812 -> Test -> LED")
     test_led(0,0)
 
-    #print("WS2812 -> Object Test")
-    #do_obj_on_off_def_off()
-
-    #print("WS2812 -> LED-Dot-Test")
-    #do_dot_test()
-
-    #print("WS2812 -> Segment-Blink")
-    #set_led_obj(0,"blink")
-    #for i in range(0,10):
-    #    do_blink()
-    #    time.sleep(0.5)
-    #set_led_obj(0,"def")    
-    
-
     print("WS2812 -> End of Program !!!")
 
 # End
@@ -346,4 +332,5 @@ def main():
 #------------------------------------------------------------------------------
 
 if __name__ == "__main__":
+    
     main()
