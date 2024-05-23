@@ -17,17 +17,27 @@ class LED_OBJ:
     def get_num_pix(self):
         return self.num_pix
     
-    def set_pos(self, pos):
-        self.pos = pos
-
     def get_pos(self):
         return self.pos
+
+    def set_pos(self, pos):
+        self.pos = pos
     
+    def set_dir(self, dir):
+        self.dir = dir
+
     def anim_step(self):
         if self.dir == True:
-            print("Step Right")
+            if self.pos < self.num_pix - 1:
+                self.pos = self.pos + 1
+            else:
+                self.pos = 0
         else:
-            print("Step Left")
+            if self.pos > 0:
+                self.pos = self.pos - 1
+            else:
+                self.pos = self.num_pix - 1
+        return self.pos
 
 
 # ------------------------------------------------------------------------------
@@ -36,12 +46,20 @@ class LED_OBJ:
 def main():
 
     print("Object -> Setup")
-    led_obj = LED_OBJ(50)
+    led_obj = LED_OBJ(20)
     print("Decode -> Test")
     print("Get -> num_pix = ", led_obj.get_num_pix())
-    led_obj.set_pos(20)
+    led_obj.set_pos(10)
     print("Get -> pos = ", led_obj.get_pos())
     print("-----------------------------------")
+    led_obj.set_dir(True)
+    print("Schleife")
+    for i in range(0, 20):
+        print("Get -> pos = ", led_obj.anim_step())
+        #print("Get -> pos = ", led_obj.get_pos())
+        time.sleep(0.5)
+    print("-----------------------------------")
+
 
 
 # ==============================================================================
@@ -51,6 +69,9 @@ def main():
 # ###############################################################################
 
 if __name__ == "__main__":
+
+    import time
+
     main()
 
     # Normal sollte das Programm hier nie ankommen !
