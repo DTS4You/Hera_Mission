@@ -5,8 +5,8 @@
 # User Button (GPIO24)
 # User LED    (GPIO25)
 
-from machine import Pin
-import time
+from machine import Pin # type: ignore
+import time # type: ignore
 
 def int_button(pin):
     value = not(bool(usr_btn.value()))
