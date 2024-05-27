@@ -1,5 +1,5 @@
 # Module WS2812 V1.01
-import time
+import time # type: ignore
 import libs.module_neopixel as module_neopixel
 from libs.module_init import Global_WS2812 as MyGlobal
 

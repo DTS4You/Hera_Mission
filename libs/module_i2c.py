@@ -2,9 +2,9 @@
 # ### I2C
 # ### V 1.00
 # #############################################################################
-from machine import Pin, I2C
+from machine import Pin, I2C # type: ignore
 from libs.mcp23017 import MCP23017
-import time
+import time # type: ignore
 
 
 class GPIO:
