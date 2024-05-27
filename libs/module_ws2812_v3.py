@@ -68,12 +68,12 @@ class Ledsegment:
     def set_color_blink_on(self, color_value):
         self.color_blink_on = color_value
 
-    def set_pixel(self, pixel_num, color=None):
+    def set_pixel(self, pos, color=None):
         if color:
             self.color_value = color
         else:
             self.color_value = self.color_show
-        self.neopixel.set_pixel(self.start + pixel_num, self.color_value)
+        self.neopixel.set_pixel(self.start + pos, self.color_value)
 
     def show_on(self):
         self.color_show = self.color_on
@@ -286,7 +286,7 @@ def do_obj_on_off_def_off():
         do_refresh()
 
 def do_dot_test():
-    delay_time = 0.2
+    delay_time = 0.05
     color_now = (0,10,60)
     for y in range(len(led_obj)):
         for x in range(led_obj[y].count):
@@ -313,16 +313,25 @@ def set_led_obj(obj,state):
 # -----------------------------------------------------------------------------
 
 def main():
-    
-    print("WS2812 -> Setup")
-    setup_ws2812()
-        
-    print("WS2812 -> Run self test")
-    self_test()
-    
-    print("WS2812 -> Test -> LED")
-    test_led(0,0)
 
+    try:
+        print("Start")
+        
+        print("WS2812 -> Setup")
+        setup_ws2812()
+        
+        #print("WS2812 -> Run self test")
+        #self_test()
+    
+        print("WS2812 -> Test -> LED")
+        do_dot_test()
+
+    except KeyboardInterrupt:
+        print("Keyboard Interrupt")
+        do_all_off()
+    finally:
+        print("Exiting the program")
+    
     print("WS2812 -> End of Program !!!")
 
 # End
