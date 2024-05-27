@@ -124,6 +124,49 @@ def main():
 
                         #MyWS2812.set_led_obj(MyDecode.get_value_1(), MyDecode.get_value_2())
 
+                        # ------------------------------------------------------------------
+                        if MyDecode.get_value_1() == 81:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(0, True)
+                            else:
+                                MyGPIO.i2c_write(0, False)
+                        
+                        if MyDecode.get_value_1() == 82:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(1, True)
+                            else:
+                                MyGPIO.i2c_write(1, False)
+
+                        if MyDecode.get_value_1() == 83:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(2, True)
+                            else:
+                                MyGPIO.i2c_write(2, False)
+                            
+                        if MyDecode.get_value_1() == 84:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(3, True)
+                            else:
+                                MyGPIO.i2c_write(3, False)
+
+                        if MyDecode.get_value_1() == 85:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(4, True)
+                            else:
+                                MyGPIO.i2c_write(4, False)
+
+                        if MyDecode.get_value_1() == 86:
+                            print("Motor 1 -> " + MyDecode.get_value_2())
+                            if MyDecode.get_value_2() == "on":
+                                MyGPIO.i2c_write(5, True)
+                            else:
+                                MyGPIO.i2c_write(5, False)
+
                 if MyDecode.get_cmd_1() == "test":
                     #print("Test")
                     if MyDecode.get_cmd_2() == "led":
@@ -135,11 +178,6 @@ def main():
         # Loop-Delay !!!
         time.sleep(0.01)        # 10ms
         
-        
-
-        
-
-
 
     print("=== End of Main ===")
 
@@ -152,6 +190,15 @@ def main():
 
 
 if __name__ == "__main__":
+
+    if MyModule.inc_i2c:
+        #print("I2C_MCP23017 -> Load-Module")
+        import libs.module_i2c as MyGPIO
+        #print("I2C -> Setup")
+        MyGPIO.i2c_setup()
+        ### Test ###
+        #print("I2C -> SetOutput")
+        #MyGPIO.i2c_write(0,True)
 
     if MyModule.inc_ws2812:
         #print("WS2812 -> Load-Module")
