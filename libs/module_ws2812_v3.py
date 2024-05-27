@@ -328,7 +328,9 @@ def main():
 
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
+        # Aufräumen
         do_all_off()
+
     finally:
         print("Exiting the program")
     
