@@ -70,7 +70,7 @@ def main():
 
 if __name__ == "__main__":
 
-    import time
+    import time # type: ignore
 
     main()
 
