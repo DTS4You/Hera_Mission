@@ -73,6 +73,19 @@ def main():
         gpio.set_output(i, False)
         time.sleep(0.3)
 
+    try:
+        print("Start")
+        while(True):
+            for i in range(0,8):
+                print(gpio.get_input(8 + i))
+            time.sleep(0.3)
+            # print("Run")
+    except KeyboardInterrupt:
+        print("Keyboard Interrupt")
+
+    finally:
+        print("Exiting the program")
+
     print("=== End Main ===")
 
 # ------------------------------------------------------------------------------
