@@ -2,7 +2,7 @@
 ### Objects                                                      ###
 ####################################################################
 
-class LED_OBJ:
+class ANIM_SEQ:
 
     def __init__(self, num_pix = 0, dir = False):
         
