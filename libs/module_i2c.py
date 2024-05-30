@@ -76,10 +76,9 @@ def main():
     try:
         print("Start")
         while(True):
-            for i in range(0,8):
-                print(gpio.get_input(8 + i))
+            print(gpio.get_input(8))
             time.sleep(0.3)
-            # print("Run")
+            #print("RUN")
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
 
