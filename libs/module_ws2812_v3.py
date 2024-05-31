@@ -38,8 +38,9 @@ class Ledsegment:
         self.stop = self.start + count - 1
         self.count = count
         self.position = 0
-        self.direction = False           # False -> Links -> im Uhrzeigersinn | True -> Rechts -> gegen Uhrzeigersinn
+        self.direction = True           # False -> Links -> im Uhrzeigersinn | True -> Rechts -> gegen Uhrzeigersinn
         self.run_state = False
+        self.mode = True                # False -> 1. Pixel | True -> 4. Pixel
         self.blink_state = False
         self.color_off = (0,0,0)
         self.color_on = (0,0,0)
@@ -124,16 +125,34 @@ class Ledsegment:
                 self.position = self.position - 1
             else:
                 self.position = self.count - 1
+        #print(self.position)
         return self.position
     
     def anim_show(self):
         self.color_show = self.color_default
         self.set_line()
-        self.set_pixel(self.position, self.color_on)
-        if self.position > self.count - 2:
-            self.set_pixel(0, self.color_on)
+
+        if self.mode == True:
+            # Draw 1. Pixel
+            self.set_pixel(self.position, self.color_half)
+            # Draw 2. Pixel
+            if self.position > 0:
+                self.set_pixel(self.position - 1, self.color_on)
+            else:
+                self.set_pixel(self.count - 1 + self.position, self.color_on)
+            # Draw 3. Pixel
+            if self.position > 1:
+                self.set_pixel(self.position - 2, self.color_on)
+            else:
+                self.set_pixel(self.count - 2 + self.position, self.color_on)
+            # Draw 4. Pixel
+            if self.position > 2:
+                self.set_pixel(self.position - 3, self.color_half)
+            else:
+                self.set_pixel(self.count - 3 + self.position, self.color_half)
         else:
-            self.set_pixel(self.position + 1, self.color_on)
+            self.set_pixel(self.position, self.color_on)
+        # Draw Stripe
         self.show_stripe()
         self.anim_step()
 
@@ -391,8 +410,8 @@ def main():
 
         print("WS2812 -> Pixel Test")
         for i in range(0,80):
-            led_obj[2].anim_show()
-            time.sleep(0.1)
+            led_obj[4].anim_show()
+            time.sleep(0.2)
 
         
 
