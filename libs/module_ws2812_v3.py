@@ -123,14 +123,22 @@ class Ledsegment:
                 self.position = self.position + 1
             else:
                 self.position = 0
+                self.run_state = True
         else:
             if self.position > 0:
                 self.position = self.position - 1
             else:
                 self.position = self.count - 1
+                self.run_state = True
         #print(self.position)
         return self.position
     
+    def anim_get_end(self):
+        return self.run_state
+    
+    def anim_set_end(self):
+        self.run_state = False
+
     def anim_show(self):
         self.color_show = self.color_default
         self.set_line()
@@ -159,6 +167,8 @@ class Ledsegment:
         self.show_stripe()
         self.anim_step()
 
+    def get_position(self):
+        return self.position
 # =============================================================================
 
 def setup_ws2812():
@@ -389,7 +399,16 @@ def set_led_obj(obj,state):
 
 def do_anim_step(obj):
     led_obj[obj].anim_show()
-    print("Anim Step")
+    #print("Anim Step")
+
+def get_anim_pos(obj):
+    return led_obj[obj].get_position()
+
+def set_anim_end(obj):
+    led_obj[obj].anim_set_end()
+
+def get_anim_end(obj):
+    return led_obj[obj].anim_get_end()
 # -----------------------------------------------------------------------------
 
 def main():
@@ -403,24 +422,33 @@ def main():
         #print("WS2812 -> Run self test")
         #self_test()
     
-        print("WS2812 -> Start -> Stop")
-        for i in range (0,4):
-            start_led = 0
-            stop_led = led_obj[i].count - 1
-            print("Start -> ", start_led)
-            print("Stop  -> ", stop_led)
-            led_obj[i].set_pixel(start_led, (0,60,0))
-            led_obj[i].set_pixel(stop_led, (60,0,0))
-        do_refresh()
+        #print("WS2812 -> Start -> Stop")
+        #for i in range (0,4):
+        #    start_led = 0
+        #    stop_led = led_obj[i].count - 1
+        #    print("Start -> ", start_led)
+        #    print("Stop  -> ", stop_led)
+        #    led_obj[i].set_pixel(start_led, (0,60,0))
+        #    led_obj[i].set_pixel(stop_led, (60,0,0))
+        #do_refresh()
 
-        time.sleep(2)
+        print("WS2812 -> Anim Test")
+        #for i in range(0,80):
+        #    if not get_anim_end(0):
+        #        do_anim_step(0)
+        #    print(get_anim_pos(0))
+        #    time.sleep(0.2)
 
-        print("WS2812 -> Pixel Test")
-        for i in range(0,80):
+        while(not get_anim_end(0)):
             do_anim_step(0)
+            print(get_anim_pos(0))
             time.sleep(0.2)
-
-        
+        set_anim_end(0)
+        while(not get_anim_end(0)):
+            do_anim_step(0)
+            print(get_anim_pos(0))
+            time.sleep(0.2)
+        print("WS2812 -> Anim End ")
 
     except KeyboardInterrupt:
         print("Keyboard Interrupt")

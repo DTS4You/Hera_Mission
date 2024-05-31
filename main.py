@@ -7,14 +7,21 @@ from machine import Pin, Timer                              # type: ignore
 from libs.module_init import Global_Module as MyModule
 import time                                                 # type: ignore
 
-class Anim_Seq:
+anim_loop_div = 5
+
+state_0_flag = False
+
+class AnimSeq:
     def __init__(self):
         self.pos = 0
         self.max = 5
         self.end = False
+        self.state_flag = False
+        self.wait_tick = 0
+        self.wait_count = 30
     
     def get_state(self):
-        return self.state_pos
+        return self.pos
 
     def next_state(self):
         if self.pos > self.max and not self.end:
@@ -22,21 +29,54 @@ class Anim_Seq:
             self.end = True
         else:
             self.pos = self.pos + 1
+            self.state_flag = False
+        return self.pos
+    
+    def wait(self):
+        if self.wait_tick < self.wait_count:
+            self.wait_tick = self.wait_tick + 1
+        else:
+            self.wait_tick = 0
+            self.next_state()
 
+def anim_step():
+    #print("Anim-Step")
+    if myseq.get_state() == 0:
+        if myseq.state_flag == False:
+            print("State -> 0")
+            MyWS2812.do_all_off()
+            MyGPIO.i2c_write(7, False)
+            myseq.state_flag = True
+    
+    if myseq.get_state() == 1:
+        if myseq.state_flag == False:
+            print("State -> 1")
+            MyWS2812.do_all_def()
+            MyGPIO.i2c_write(7, True)
+            myseq.state_flag = True
+        myseq.wait()
+    
+    if myseq.get_state() == 2:
+        if myseq.state_flag == False:
+            print("State -> 2")
+            myseq.state_flag = True
+        print(MyWS2812.get_anim_pos(0))
 
-def anim_func():
-    MyWS2812.do_anim_step()
+    
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
 # ------------------------------------------------------------------------------
 def main():
+    
+    global myseq
 
-    anim_seq = Anim_Seq
+    myseq = AnimSeq()
 
     print("=== Start Main ===")
     
     anim_couter = 0
+    button_flag = False
     MyGPIO.i2c_write(0, True)
 
     try:
@@ -44,13 +84,16 @@ def main():
  
         while MySerial.sercon_read_flag():
             
+            if anim_couter > anim_loop_div:     # Loop / Loop_div -> anim_step
+                    anim_couter = 0
+                    anim_step()
+
             MyGPIO.button_poll()
 
-            if MyGPIO.button_get_state():
-                if anim_couter > 5:
-                    anim_couter = 0
-                    #print("Blink Funktion")
-                    anim_func()
+            if MyGPIO.button_get_state() and not button_flag:
+                myseq.next_state()
+                button_flag = True
+                
             
             MySerial.sercon_read_line()
             if MySerial.get_ready_flag():       # Zeichenkette empfangen
@@ -185,7 +228,7 @@ if __name__ == "__main__":
         MyWS2812.setup_ws2812()
         ### Test ###
         #print("WS2812 -> Run self test")
-        MyWS2812.self_test()
+        #MyWS2812.self_test()
         #print("WS2812 -> Blink Test")
         #MyWS2812.do_blink_test()
         #print("WS2812 -> Dot-Test")
