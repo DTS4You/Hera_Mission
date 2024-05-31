@@ -344,7 +344,7 @@ def main():
         led_obj[1].set_pixel(start_led, (0,60,0))
         led_obj[1].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
-        stop_led  = 167
+        stop_led  = 155
         led_obj[2].set_pixel(start_led, (0,60,0))
         led_obj[2].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
@@ -352,11 +352,11 @@ def main():
         led_obj[3].set_pixel(start_led, (0,60,0))
         led_obj[3].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
-        stop_led  = 167
+        stop_led  = 170
         led_obj[4].set_pixel(start_led, (0,60,0))
         led_obj[4].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
-        stop_led  = 167
+        stop_led  = 183
         led_obj[5].set_pixel(start_led, (0,60,0))
         led_obj[5].set_pixel(stop_led - 1, (60,0,0))
         do_refresh()
