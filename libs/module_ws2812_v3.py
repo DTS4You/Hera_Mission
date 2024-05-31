@@ -38,6 +38,7 @@ class Ledsegment:
         self.stop = self.start + count - 1
         self.count = count
         self.position = 0
+        self.direction = False           # False -> Links -> im Uhrzeigersinn | True -> Rechts -> gegen Uhrzeigersinn
         self.run_state = False
         self.blink_state = False
         self.color_on = (0,0,0)
@@ -109,17 +110,28 @@ class Ledsegment:
         self.neopixel.show()
 
     def anim_step(self):
-        if self.dir == True:
-            if self.pos < self.count - 1:
-                self.pos = self.pos + 1
+        if self.direction == True:
+            if self.position < self.count - 1:
+                self.position = self.position + 1
             else:
-                self.pos = 0
+                self.position = 0
         else:
-            if self.pos > 0:
-                self.pos = self.pos - 1
+            if self.position > 0:
+                self.position = self.position - 1
             else:
-                self.pos = self.count - 1
-        return self.pos
+                self.position = self.count - 1
+        return self.position
+    
+    def anim_show(self):
+        self.color_show = self.color_default
+        self.set_line()
+        self.set_pixel(self.position, self.color_on)
+        if self.position > self.count - 2:
+            self.set_pixel(0, self.color_on)
+        else:
+            self.set_pixel(self.position + 1, self.color_on)
+        self.show_stripe()
+        self.anim_step()
 
 # =============================================================================
 
@@ -337,7 +349,6 @@ def main():
         #print("WS2812 -> Run self test")
         #self_test()
     
-        '''
         print("WS2812 -> Start -> Stop")
         for i in range (0,4):
             start_led = 0
@@ -347,17 +358,23 @@ def main():
             led_obj[i].set_pixel(start_led, (0,60,0))
             led_obj[i].set_pixel(stop_led, (60,0,0))
         do_refresh()
-        '''
+
+        time.sleep(2)
+
+        print("WS2812 -> Pixel Test")
+        for i in range(0,80):
+            led_obj[0].anim_show()
+            time.sleep(0.3)
 
         
 
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
-        # Aufräumen
-        do_all_off()
-
+        
     finally:
         print("Exiting the program")
+        # Aufräumen
+        do_all_off()
     
     print("WS2812 -> End of Program !!!")
 
