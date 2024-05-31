@@ -22,7 +22,8 @@ class Global_WS2812:
 
     seg_01_strip        = 0             #  1. Seg -> Stripe      # Einschlagbahn
     seg_01_start        = 0             #  1. Seg -> Start
-    seg_01_count        = 32            #  1. Seg -> Anzahl
+    #seg_01_count        = 32            #  1. Seg -> Anzahl
+    seg_01_count        = 30            #  Debug -> 1. Seg -> Anzahl
 
     seg_02_strip        = 0             #  2. Seg -> Stripe      # Splitter
     seg_02_start        = 32            #  2. Seg -> Start
@@ -46,13 +47,25 @@ class Global_WS2812:
     
 
 # -----------------------------------------------------------------------------
-
-    color_def           = (  0,  0,  5)
+    #                        R   G   B
     color_off           = (  0,  0,  0)
+    color_def           = (  0,  0,  2)
     color_on            = (100,100,100)
     color_dot           = ( 50, 50, 50)
     color_blink_on      = (100,100,100)
     color_blink_off     = ( 30, 30, 30)
+    
+    color_anim_1_def    = (  0,  0,  2)
+    color_anim_1_on     = ( 50, 50,200)
+    color_anim_1_half   = (  0,  0,100)
+    
+    color_anim_2_def    = (  0,  2,  0)
+    color_anim_2_on     = (  0,200,  0)
+    color_anim_2_half   = (  0, 50,  0)
+
+    color_anim_3_def    = (  2,  0,  0)
+    color_anim_3_on     = (200,  0,  0)
+    color_anim_3_half   = ( 50,  0,  0)
 
 
 class Global_Default:

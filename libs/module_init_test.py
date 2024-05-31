@@ -25,16 +25,16 @@ class Global_WS2812:
     seg_01_count        = 30            #  1. Seg -> Anzahl
 
     seg_02_strip        = 0             #  2. Seg -> Stripe      # Splitter
-    seg_02_start        = 32            #  2. Seg -> Start
+    seg_02_start        = 30            #  2. Seg -> Start
     seg_02_count        = 4             #  2. Seg -> Anzahl
 
     seg_03_strip        = 1             #  3. Seg -> Stripe      # Umlaufbahn innen innen
     seg_03_start        = 0             #  3. Seg -> Start
-    seg_03_count        = 155           #  3. Seg -> Anzahl
+    seg_03_count        = 180           #  3. Seg -> Anzahl
     
     seg_04_strip        = 2             #  4. Seg -> Stripe      # Umlaufbahn innen aussen
     seg_04_start        = 0             #  4. Seg -> Start
-    seg_04_count        = 157           #  4. Seg -> Anzahl
+    seg_04_count        = 180           #  4. Seg -> Anzahl
 
     seg_05_strip        = 3             #  5. Seg -> Stripe      # Umlaufbahn aussen innen
     seg_05_start        = 0             #  5. Seg -> Start
@@ -42,17 +42,30 @@ class Global_WS2812:
     
     seg_06_strip        = 4             #  6. Seg -> Stripe      # Umlaufbahn aussen aussen
     seg_06_start        = 0             #  6. Seg -> Start
-    seg_06_count        = 183           #  6. Seg -> Anzahl
+    seg_06_count        = 180           #  6. Seg -> Anzahl
     
 
 # -----------------------------------------------------------------------------
-
-    color_def           = (  0,  0,  5)
+    #                        R   G   B
+    color_def           = (  0,  0,  3)
     color_off           = (  0,  0,  0)
     color_on            = (100,100,100)
     color_dot           = ( 50, 50, 50)
     color_blink_on      = (100,100,100)
     color_blink_off     = ( 30, 30, 30)
+    
+    color_anim_1_def    = (  0,  0,  3)
+    color_anim_1_on     = ( 50, 50,200)
+    color_anim_1_half   = (  0,  0,100)
+    
+    color_anim_2_def    = (  0,  5,  0)
+    color_anim_2_on     = (  0,100,  0)
+    color_anim_2_half   = (  0, 50,  0)
+
+    color_anim_3_def    = (  5,  0,  0)
+    color_anim_3_on     = (100,  0,  0)
+    color_anim_3_half   = ( 50,  0,  0)
+
 
 
 class Global_Default:

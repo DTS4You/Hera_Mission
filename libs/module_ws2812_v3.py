@@ -4,7 +4,7 @@
 import time # type: ignore
 import libs.module_neopixel as module_neopixel
 #from libs.module_init import Global_WS2812 as MyGlobal
-from libs.module_init_test import Global_WS2812 as MyGlobal
+from libs.module_init import Global_WS2812 as MyGlobal
 
 
 class LedState:
@@ -41,9 +41,10 @@ class Ledsegment:
         self.direction = False           # False -> Links -> im Uhrzeigersinn | True -> Rechts -> gegen Uhrzeigersinn
         self.run_state = False
         self.blink_state = False
+        self.color_off = (0,0,0)
         self.color_on = (0,0,0)
         self.color_default = (0,0,0)
-        self.color_off = (0,0,0)
+        self.color_half = (0,0,0)
         self.color_blink_on = (0,0,0)
         self.color_blink_off = (0,0,0)
         self.color_show = (0,0,0)
@@ -63,6 +64,9 @@ class Ledsegment:
 
     def set_color_show(self, color_value):
         self.color_show = color_value
+    
+    def set_color_half(self, color_value):
+        self.color_half = color_value
 
     def set_color_blink_off(self, color_value):
         self.color_blink_off = color_value
@@ -180,6 +184,30 @@ def setup_ws2812():
         leds.set_color_show(mg.color_dot)
         leds.set_color_blink_off(mg.color_blink_off)
         leds.set_color_blink_on(mg.color_blink_on)
+    
+    led_obj[0].set_color_def(mg.color_anim_1_def)
+    led_obj[0].set_color_on(mg.color_anim_1_on)
+    led_obj[0].set_color_half(mg.color_anim_1_half)
+
+    led_obj[1].set_color_def(mg.color_off)
+    led_obj[1].set_color_on(mg.color_anim_1_on)
+    led_obj[1].set_color_half(mg.color_anim_1_half)
+
+    led_obj[2].set_color_def(mg.color_anim_3_def)
+    led_obj[2].set_color_on(mg.color_anim_3_on)
+    led_obj[2].set_color_half(mg.color_anim_3_half)
+
+    led_obj[3].set_color_def(mg.color_anim_3_def)
+    led_obj[3].set_color_on(mg.color_anim_3_on)
+    led_obj[3].set_color_half(mg.color_anim_3_half)
+
+    led_obj[4].set_color_def(mg.color_anim_2_def)
+    led_obj[4].set_color_on(mg.color_anim_2_on)
+    led_obj[4].set_color_half(mg.color_anim_2_half)
+
+    led_obj[4].set_color_def(mg.color_anim_2_def)
+    led_obj[4].set_color_on(mg.color_anim_2_on)
+    led_obj[4].set_color_half(mg.color_anim_2_half)
     
     # Blinken aus
     do_all_no_blink()
@@ -363,8 +391,8 @@ def main():
 
         print("WS2812 -> Pixel Test")
         for i in range(0,80):
-            led_obj[0].anim_show()
-            time.sleep(0.3)
+            led_obj[2].anim_show()
+            time.sleep(0.1)
 
         
 
