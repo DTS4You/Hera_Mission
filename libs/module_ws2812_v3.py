@@ -322,8 +322,45 @@ def main():
         #print("WS2812 -> Run self test")
         #self_test()
     
-        print("WS2812 -> Test -> LED")
-        do_dot_test()
+        '''
+        print("WS2812 -> Start -> Stop")
+        for i in range (0,4):
+            start_led = 0
+            stop_led = led_obj[i].count - 1
+            print("Start -> ", start_led)
+            print("Stop  -> ", stop_led)
+            led_obj[i].set_pixel(start_led, (0,60,0))
+            led_obj[i].set_pixel(stop_led, (60,0,0))
+        do_refresh()
+        '''
+
+        print("WS2812 -> Start -> Stop")
+        start_led = 0
+        stop_led  = 32
+        led_obj[0].set_pixel(start_led, (0,60,0))
+        led_obj[0].set_pixel(stop_led - 1, (60,0,0))
+        start_led = 0
+        stop_led  = 4
+        led_obj[1].set_pixel(start_led, (0,60,0))
+        led_obj[1].set_pixel(stop_led - 1, (60,0,0))
+        start_led = 0
+        stop_led  = 167
+        led_obj[2].set_pixel(start_led, (0,60,0))
+        led_obj[2].set_pixel(stop_led - 1, (60,0,0))
+        start_led = 0
+        stop_led  = 167
+        led_obj[3].set_pixel(start_led, (0,60,0))
+        led_obj[3].set_pixel(stop_led - 1, (60,0,0))
+        start_led = 0
+        stop_led  = 167
+        led_obj[4].set_pixel(start_led, (0,60,0))
+        led_obj[4].set_pixel(stop_led - 1, (60,0,0))
+        start_led = 0
+        stop_led  = 167
+        led_obj[5].set_pixel(start_led, (0,60,0))
+        led_obj[5].set_pixel(stop_led - 1, (60,0,0))
+        do_refresh()
+        
 
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
