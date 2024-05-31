@@ -7,17 +7,32 @@ from machine import Pin, Timer                              # type: ignore
 from libs.module_init import Global_Module as MyModule
 import time                                                 # type: ignore
 
+class Anim_Seq:
+    def __init__(self):
+        self.pos = 0
+        self.max = 5
+        self.end = False
+    
+    def get_state(self):
+        return self.state_pos
+
+    def next_state(self):
+        if self.pos > self.max and not self.end:
+            self.pos = 0
+            self.end = True
+        else:
+            self.pos = self.pos + 1
 
 
 def anim_func():
-    pass
-    #MyWS2812.do_blink()
-
+    MyWS2812.do_anim_step()
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
 # ------------------------------------------------------------------------------
 def main():
+
+    anim_seq = Anim_Seq
 
     print("=== Start Main ===")
     
@@ -31,10 +46,11 @@ def main():
             
             MyGPIO.button_poll()
 
-            if anim_couter > 5:
-                anim_couter = 0
-                #print("Blink Funktion")
-                anim_func()
+            if MyGPIO.button_get_state():
+                if anim_couter > 5:
+                    anim_couter = 0
+                    #print("Blink Funktion")
+                    anim_func()
             
             MySerial.sercon_read_line()
             if MySerial.get_ready_flag():       # Zeichenkette empfangen

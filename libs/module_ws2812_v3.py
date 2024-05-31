@@ -75,6 +75,9 @@ class Ledsegment:
     def set_color_blink_on(self, color_value):
         self.color_blink_on = color_value
 
+    def set_mode(self, mode):
+        self.mode = mode
+
     def set_pixel(self, pos, color=None):
         if color:
             self.color_value = color
@@ -211,6 +214,7 @@ def setup_ws2812():
     led_obj[1].set_color_def(mg.color_off)
     led_obj[1].set_color_on(mg.color_anim_1_on)
     led_obj[1].set_color_half(mg.color_anim_1_half)
+    led_obj[1].set_mode(False)
 
     led_obj[2].set_color_def(mg.color_anim_3_def)
     led_obj[2].set_color_on(mg.color_anim_3_on)
@@ -383,6 +387,9 @@ def set_led_obj(obj,state):
         led_obj[obj].show_blink()
     do_refresh()
 
+def do_anim_step(obj):
+    led_obj[obj].anim_show()
+    print("Anim Step")
 # -----------------------------------------------------------------------------
 
 def main():
@@ -410,7 +417,7 @@ def main():
 
         print("WS2812 -> Pixel Test")
         for i in range(0,80):
-            led_obj[4].anim_show()
+            do_anim_step(0)
             time.sleep(0.2)
 
         
