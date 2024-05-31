@@ -333,7 +333,7 @@ def main():
             led_obj[i].set_pixel(stop_led, (60,0,0))
         do_refresh()
         '''
-
+        '''
         print("WS2812 -> Start -> Stop")
         start_led = 0
         stop_led  = 32
@@ -366,6 +366,7 @@ def main():
         led_obj[5].set_pixel(161, (0,60,60))
         # Alles Anzeigen
         do_refresh()
+        '''
         
 
     except KeyboardInterrupt:
