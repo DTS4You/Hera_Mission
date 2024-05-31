@@ -348,17 +348,23 @@ def main():
         led_obj[2].set_pixel(start_led, (0,60,0))
         led_obj[2].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
-        stop_led  = 167
+        stop_led  = 157
         led_obj[3].set_pixel(start_led, (0,60,0))
         led_obj[3].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
-        stop_led  = 170
+        stop_led  = 180
         led_obj[4].set_pixel(start_led, (0,60,0))
         led_obj[4].set_pixel(stop_led - 1, (60,0,0))
         start_led = 0
         stop_led  = 183
         led_obj[5].set_pixel(start_led, (0,60,0))
         led_obj[5].set_pixel(stop_led - 1, (60,0,0))
+        # Treffer Position
+        led_obj[2].set_pixel(135, (0,60,60))
+        led_obj[3].set_pixel(137, (0,60,60))
+        led_obj[4].set_pixel(160, (0,60,60))
+        led_obj[5].set_pixel(161, (0,60,60))
+        # Alles Anzeigen
         do_refresh()
         
 
