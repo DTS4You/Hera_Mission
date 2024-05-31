@@ -21,6 +21,7 @@ def main():
     print("=== Start Main ===")
     
     blink_couter = 0
+    MyGPIO.i2c_write(0, True)
 
     try:
         print("Start Main Loop")
@@ -71,49 +72,49 @@ def main():
                                     MyGPIO.i2c_write(0, False)
                             
                             if MyDecode.get_value_1() == 82:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor 2 -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(1, True)
                                 else:
                                     MyGPIO.i2c_write(1, False)
 
                             if MyDecode.get_value_1() == 83:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor 3 -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(2, True)
                                 else:
                                     MyGPIO.i2c_write(2, False)
                                 
                             if MyDecode.get_value_1() == 84:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor 4 -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(3, True)
                                 else:
                                     MyGPIO.i2c_write(3, False)
 
                             if MyDecode.get_value_1() == 85:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor 5 -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(4, True)
                                 else:
                                     MyGPIO.i2c_write(4, False)
 
                             if MyDecode.get_value_1() == 86:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor 6 -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(5, True)
                                 else:
                                     MyGPIO.i2c_write(5, False)
                         
                             if MyDecode.get_value_1() == 87:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Motor -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(6, True)
                                 else:
                                     MyGPIO.i2c_write(6, False)
 
                             if MyDecode.get_value_1() == 88:
-                                print("Motor 1 -> " + MyDecode.get_value_2())
+                                print("Lampe -> " + MyDecode.get_value_2())
                                 if MyDecode.get_value_2() == "on":
                                     MyGPIO.i2c_write(7, True)
                                 else:

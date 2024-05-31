@@ -312,15 +312,15 @@ def self_test():                                # Pro Stripe einmal Aus-RGB(25%)
         strips.show()
         time.sleep(0.3)
         # Alle Rot
-        strips.set_pixel_line(0, strips.num_leds - 1, (50,0,0))
+        strips.set_pixel_line(0, strips.num_leds - 1, (30,0,0))
         strips.show()
         time.sleep(0.3)
         # Alle Grün
-        strips.set_pixel_line(0, strips.num_leds - 1, (0,50,0))
+        strips.set_pixel_line(0, strips.num_leds - 1, (0,30,0))
         strips.show()
         time.sleep(0.3)
         # Alle Blau
-        strips.set_pixel_line(0, strips.num_leds - 1, (0,0,50))
+        strips.set_pixel_line(0, strips.num_leds - 1, (0,0,30))
         strips.show()
         time.sleep(0.3)
         # Alle Aus
