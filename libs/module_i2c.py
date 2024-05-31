@@ -9,7 +9,7 @@ import time # type: ignore
 
 class GPIO:
 
-    def __init__(self, blink_time=10, run_time= 1000):
+    def __init__(self, blink_time=20, run_time= 8000):
         i2c = I2C(0, scl=Pin(21), sda=Pin(20))
         self.mcp = MCP23017(i2c, 0x20)
         self.input = False
@@ -31,16 +31,16 @@ class GPIO:
 
     def get_button(self):
         if self.state:
-            self.blink_counter += 1
-            if self.blink_counter > self.blink_time:
+            if self.blink_time < self.blink_counter:
                 self.blink_state = not self.blink_state
                 self.blink_counter = 0
-            self.run_counter += 1
-            if self.run_counter > self.run_time:
+            if self.run_time < self.run_counter:
                 self.state = False
                 self.blink_state = False
                 self.blink_counter = 0
                 self.run_counter = 0
+            self.blink_counter += 1
+            self.run_counter += 1
         else:
             self.state = self.state or self.get_input(8)
         self.set_output(0, not self.blink_state)
@@ -59,6 +59,21 @@ def i2c_all_off():
         gpio.set_output(i, False)
         time.sleep(0.02)
 
+def button_poll():
+    gpio.get_button()
+
+def button_set_state(state):
+    gpio.state = state
+
+def button_get_state():
+    return gpio.state
+
+def button_reset():
+    gpio.state = False
+    gpio.blink_state = False
+    gpio.blink_counter = 0
+    gpio.run_counter = 0
+
 # -----------------------------------------------------------------------------
 def main():
 
@@ -76,8 +91,8 @@ def main():
     try:
         print("Start")
         while(True):
-            print(gpio.get_input(8))
-            time.sleep(0.3)
+            gpio.get_button()
+            time.sleep(0.02)  # 20ms 
             #print("RUN")
     except KeyboardInterrupt:
         print("Keyboard Interrupt")

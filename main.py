@@ -9,8 +9,9 @@ import time                                                 # type: ignore
 
 
 
-def blink_func():
-    MyWS2812.do_blink()
+def anim_func():
+    pass
+    #MyWS2812.do_blink()
 
 
 # ------------------------------------------------------------------------------
@@ -20,18 +21,20 @@ def main():
 
     print("=== Start Main ===")
     
-    blink_couter = 0
+    anim_couter = 0
     MyGPIO.i2c_write(0, True)
 
     try:
         print("Start Main Loop")
  
         while MySerial.sercon_read_flag():
+            
+            MyGPIO.button_poll()
 
-            if blink_couter > 50:
-                blink_couter = 0
+            if anim_couter > 5:
+                anim_couter = 0
                 #print("Blink Funktion")
-                blink_func()
+                anim_func()
             
             MySerial.sercon_read_line()
             if MySerial.get_ready_flag():       # Zeichenkette empfangen
@@ -127,9 +130,9 @@ def main():
                             MyWS2812.test_led(MyDecode.get_value_1(), MyDecode.get_value_2())
                     
 
-            blink_couter = blink_couter + 1
+            anim_couter = anim_couter + 1
             # Loop-Delay !!!
-            time.sleep(0.01)        # 10ms
+            time.sleep(0.02)        # 20ms
     
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
