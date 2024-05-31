@@ -3,7 +3,8 @@
 ###############################################################################
 import time # type: ignore
 import libs.module_neopixel as module_neopixel
-from libs.module_init import Global_WS2812 as MyGlobal
+#from libs.module_init import Global_WS2812 as MyGlobal
+from libs.module_init_test import Global_WS2812 as MyGlobal
 
 
 class LedState:
@@ -107,6 +108,20 @@ class Ledsegment:
     def show_stripe(self):
         self.neopixel.show()
 
+    def anim_step(self):
+        if self.dir == True:
+            if self.pos < self.count - 1:
+                self.pos = self.pos + 1
+            else:
+                self.pos = 0
+        else:
+            if self.pos > 0:
+                self.pos = self.pos - 1
+            else:
+                self.pos = self.count - 1
+        return self.pos
+
+# =============================================================================
 
 def setup_ws2812():
 
@@ -333,40 +348,7 @@ def main():
             led_obj[i].set_pixel(stop_led, (60,0,0))
         do_refresh()
         '''
-        '''
-        print("WS2812 -> Start -> Stop")
-        start_led = 0
-        stop_led  = 32
-        led_obj[0].set_pixel(start_led, (0,60,0))
-        led_obj[0].set_pixel(stop_led - 1, (60,0,0))
-        start_led = 0
-        stop_led  = 4
-        led_obj[1].set_pixel(start_led, (0,60,0))
-        led_obj[1].set_pixel(stop_led - 1, (60,0,0))
-        start_led = 0
-        stop_led  = 155
-        led_obj[2].set_pixel(start_led, (0,60,0))
-        led_obj[2].set_pixel(stop_led - 1, (60,0,0))
-        start_led = 0
-        stop_led  = 157
-        led_obj[3].set_pixel(start_led, (0,60,0))
-        led_obj[3].set_pixel(stop_led - 1, (60,0,0))
-        start_led = 0
-        stop_led  = 180
-        led_obj[4].set_pixel(start_led, (0,60,0))
-        led_obj[4].set_pixel(stop_led - 1, (60,0,0))
-        start_led = 0
-        stop_led  = 183
-        led_obj[5].set_pixel(start_led, (0,60,0))
-        led_obj[5].set_pixel(stop_led - 1, (60,0,0))
-        # Treffer Position
-        led_obj[2].set_pixel(135, (0,60,60))
-        led_obj[3].set_pixel(137, (0,60,60))
-        led_obj[4].set_pixel(160, (0,60,60))
-        led_obj[5].set_pixel(161, (0,60,60))
-        # Alles Anzeigen
-        do_refresh()
-        '''
+
         
 
     except KeyboardInterrupt:
