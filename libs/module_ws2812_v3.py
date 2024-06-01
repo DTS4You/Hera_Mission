@@ -238,9 +238,9 @@ def setup_ws2812():
     led_obj[4].set_color_on(mg.color_anim_2_on)
     led_obj[4].set_color_half(mg.color_anim_2_half)
 
-    led_obj[4].set_color_def(mg.color_anim_2_def)
-    led_obj[4].set_color_on(mg.color_anim_2_on)
-    led_obj[4].set_color_half(mg.color_anim_2_half)
+    led_obj[5].set_color_def(mg.color_anim_2_def)
+    led_obj[5].set_color_on(mg.color_anim_2_on)
+    led_obj[5].set_color_half(mg.color_anim_2_half)
     
     # Blinken aus
     do_all_no_blink()

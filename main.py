@@ -7,7 +7,7 @@ from machine import Pin, Timer                              # type: ignore
 from libs.module_init import Global_Module as MyModule
 import time                                                 # type: ignore
 
-anim_loop_div = 5
+anim_loop_div = 1
 
 state_0_flag = False
 
@@ -18,7 +18,7 @@ class AnimSeq:
         self.end = False
         self.state_flag = False
         self.wait_tick = 0
-        self.wait_count = 30
+        self.wait_count = 100
     
     def get_state(self):
         return self.pos
@@ -60,12 +60,12 @@ def anim_step():
         if myseq.state_flag == False:
             print("State -> 2")
             myseq.state_flag = True
-        if(not MyWS2812.get_anim_end(5)):
+        if not MyWS2812.get_anim_end(5):
             MyWS2812.do_anim_step(5)
         else:
             MyWS2812.set_anim_end(5)
             myseq.next_state()
-        if(not MyWS2812.get_anim_end(4)):
+        if not MyWS2812.get_anim_end(4):
             MyWS2812.do_anim_step(4)
         else:
             MyWS2812.set_anim_end(4)
@@ -74,17 +74,23 @@ def anim_step():
         if myseq.state_flag == False:
             print("State -> 3")
             myseq.state_flag = True
-        if(not MyWS2812.get_anim_end(5)):
+        if not MyWS2812.get_anim_end(5):
             MyWS2812.do_anim_step(5)
-            if MyWS2812.get_anim_pos(5) > 10:
-                MyWS2812.do_anim_step(0)
-        else:
-            MyWS2812.set_anim_end(5)
-            myseq.next_state()
-        if(not MyWS2812.get_anim_end(4)):
+            if MyWS2812.get_anim_pos(5) > 161 - 31:          # Trefferposition auf Außenbahn bei 161
+                if not MyWS2812.get_anim_end(0):
+                    MyWS2812.do_anim_step(0)
+                else:
+                    MyWS2812.set_anim_end(0)
+                    myseq.next_state()
+        if not MyWS2812.get_anim_end(4):
             MyWS2812.do_anim_step(4)
         else:
             MyWS2812.set_anim_end(4)
+    
+    if myseq.get_state() == 4:
+        if myseq.state_flag == False:
+            print("State -> 4")
+            myseq.state_flag = True
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -213,7 +219,7 @@ def main():
 
             anim_couter = anim_couter + 1
             # Loop-Delay !!!
-            time.sleep(0.02)        # 20ms
+            time.sleep_ms(10)        # 10ms
     
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
