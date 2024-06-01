@@ -218,7 +218,9 @@ def main():
     except KeyboardInterrupt:
         print("Keyboard Interrupt")
     finally:
-        print("Exiting the program")   
+        print("Exiting the program")
+        MyWS2812.do_all_off()
+        MyGPIO.i2c_all_off()   
 
     print("=== End of Main ===")
 
