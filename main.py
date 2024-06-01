@@ -60,9 +60,31 @@ def anim_step():
         if myseq.state_flag == False:
             print("State -> 2")
             myseq.state_flag = True
-        print(MyWS2812.get_anim_pos(0))
+        if(not MyWS2812.get_anim_end(5)):
+            MyWS2812.do_anim_step(5)
+        else:
+            MyWS2812.set_anim_end(5)
+            myseq.next_state()
+        if(not MyWS2812.get_anim_end(4)):
+            MyWS2812.do_anim_step(4)
+        else:
+            MyWS2812.set_anim_end(4)
 
-    
+    if myseq.get_state() == 3:
+        if myseq.state_flag == False:
+            print("State -> 3")
+            myseq.state_flag = True
+        if(not MyWS2812.get_anim_end(5)):
+            MyWS2812.do_anim_step(5)
+            if MyWS2812.get_anim_pos(5) > 10:
+                MyWS2812.do_anim_step(0)
+        else:
+            MyWS2812.set_anim_end(5)
+            myseq.next_state()
+        if(not MyWS2812.get_anim_end(4)):
+            MyWS2812.do_anim_step(4)
+        else:
+            MyWS2812.set_anim_end(4)
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
