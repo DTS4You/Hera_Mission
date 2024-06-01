@@ -169,6 +169,10 @@ class Ledsegment:
 
     def get_position(self):
         return self.position
+    
+    def set_position(self, pos):
+        self.position = pos
+    
 # =============================================================================
 
 def setup_ws2812():
@@ -244,6 +248,8 @@ def setup_ws2812():
     
     # Blinken aus
     do_all_no_blink()
+
+#==============================================================================
 
 def test_led(stripe, pos):
     do_all_off()
@@ -404,11 +410,24 @@ def do_anim_step(obj):
 def get_anim_pos(obj):
     return led_obj[obj].get_position()
 
+def set_anim_pos(obj, pos):
+    led_obj[obj].set_position(pos)
+
 def set_anim_end(obj):
     led_obj[obj].anim_set_end()
 
 def get_anim_end(obj):
     return led_obj[obj].anim_get_end()
+
+def do_show_off(obj):
+    led_obj[obj].show_off()
+
+def do_show_def(obj):
+    led_obj[obj].show_def()
+
+def do_show_on(obj):
+    led_obj[obj].show_on()
+
 # -----------------------------------------------------------------------------
 
 def main():

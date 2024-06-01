@@ -73,6 +73,7 @@ def button_reset():
     gpio.blink_state = False
     gpio.blink_counter = 0
     gpio.run_counter = 0
+    gpio.set_output(0, False)
 
 # -----------------------------------------------------------------------------
 def main():

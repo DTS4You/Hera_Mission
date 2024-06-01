@@ -14,12 +14,19 @@ state_0_flag = False
 class AnimSeq:
     def __init__(self):
         self.pos = 0
-        self.max = 5
+        self.max = 7
         self.end = False
         self.state_flag = False
+        self.button_flag = False
         self.wait_tick = 0
         self.wait_count = 100
     
+    def reset(self):
+        self.pos = 0
+        self.end = False
+        self.state_flag = False
+        self.button_flag = False
+
     def get_state(self):
         return self.pos
 
@@ -44,14 +51,14 @@ def anim_step():
     if myseq.get_state() == 0:
         if myseq.state_flag == False:
             print("State -> 0")
-            MyWS2812.do_all_off()
+            MyWS2812.do_all_def()
             MyGPIO.i2c_write(7, False)
             myseq.state_flag = True
     
     if myseq.get_state() == 1:
         if myseq.state_flag == False:
             print("State -> 1")
-            MyWS2812.do_all_def()
+            MyWS2812.do_all_off()
             MyGPIO.i2c_write(7, True)
             myseq.state_flag = True
         myseq.wait()
@@ -60,6 +67,8 @@ def anim_step():
         if myseq.state_flag == False:
             print("State -> 2")
             myseq.state_flag = True
+            MyWS2812.do_show_def(5)
+            MyWS2812.do_show_def(4)
         if not MyWS2812.get_anim_end(5):
             MyWS2812.do_anim_step(5)
         else:
@@ -73,10 +82,11 @@ def anim_step():
     if myseq.get_state() == 3:
         if myseq.state_flag == False:
             print("State -> 3")
+            MyWS2812.set_anim_pos(0, 3)
             myseq.state_flag = True
         if not MyWS2812.get_anim_end(5):
             MyWS2812.do_anim_step(5)
-            if MyWS2812.get_anim_pos(5) > 161 - 31:          # Trefferposition auf Außenbahn bei 161
+            if MyWS2812.get_anim_pos(5) > ( 161 - 31 - 4 ):          # Trefferposition auf Außenbahn bei 161
                 if not MyWS2812.get_anim_end(0):
                     MyWS2812.do_anim_step(0)
                 else:
@@ -87,10 +97,57 @@ def anim_step():
         else:
             MyWS2812.set_anim_end(4)
     
-    if myseq.get_state() == 4:
+    if myseq.get_state() == 4:                  # Aufschlag
         if myseq.state_flag == False:
             print("State -> 4")
+            MyWS2812.do_all_off()
+            #MyWS2812.do_show_def(1)
             myseq.state_flag = True
+        if not MyWS2812.get_anim_end(1):
+            MyWS2812.do_anim_step(1)
+        else:
+            MyWS2812.set_anim_end(1)
+            myseq.next_state()
+    
+    if myseq.get_state() == 5:                  # Neue Bahn
+        if myseq.state_flag == False:
+            print("State -> 5")
+            MyWS2812.do_all_off()
+            myseq.state_flag = True
+            MyWS2812.set_anim_pos(2, 135)
+            MyWS2812.set_anim_pos(3, 137)
+        if not MyWS2812.get_anim_end(3):
+            MyWS2812.do_anim_step(3)
+        else:
+            MyWS2812.set_anim_end(3)
+            myseq.next_state()
+        if not MyWS2812.get_anim_end(2):
+            MyWS2812.do_anim_step(2)
+        else:
+            MyWS2812.set_anim_end(2)
+
+    if myseq.get_state() == 6:
+        if myseq.state_flag == False:
+            print("State -> 6")
+            #MyWS2812.do_all_def()
+            myseq.state_flag = True
+        if not MyWS2812.get_anim_end(3):
+            MyWS2812.do_anim_step(3)
+        else:
+            MyWS2812.set_anim_end(3)
+            myseq.next_state()
+        if not MyWS2812.get_anim_end(2):
+            MyWS2812.do_anim_step(2)
+        else:
+            MyWS2812.set_anim_end(2)
+
+    if myseq.get_state() == 7:
+        if myseq.state_flag == False:
+            print("State -> 7")
+            MyWS2812.do_all_def()
+            MyGPIO.button_reset()
+            MyGPIO.i2c_all_off()
+            myseq.reset()
 
 # ------------------------------------------------------------------------------
 # --- Main Function                                                          ---
@@ -104,7 +161,7 @@ def main():
     print("=== Start Main ===")
     
     anim_couter = 0
-    button_flag = False
+    
     MyGPIO.i2c_write(0, True)
 
     try:
@@ -118,9 +175,9 @@ def main():
 
             MyGPIO.button_poll()
 
-            if MyGPIO.button_get_state() and not button_flag:
+            if MyGPIO.button_get_state() and not myseq.button_flag:
                 myseq.next_state()
-                button_flag = True
+                myseq.button_flag = True
                 
             
             MySerial.sercon_read_line()
