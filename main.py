@@ -52,14 +52,14 @@ def anim_step():
         if myseq.state_flag == False:
             print("State -> 0")
             MyWS2812.do_all_def()
-            MyGPIO.i2c_write(7, False)
+            MyGPIO.i2c_write(6, False)
             myseq.state_flag = True
     
     if myseq.get_state() == 1:
         if myseq.state_flag == False:
             print("State -> 1")
             MyWS2812.do_all_off()
-            MyGPIO.i2c_write(7, True)
+            MyGPIO.i2c_write(6, True)
             myseq.state_flag = True
         myseq.wait()
     
@@ -146,7 +146,7 @@ def anim_step():
             print("State -> 7")
             MyWS2812.do_all_def()
             MyGPIO.button_reset()
-            MyGPIO.i2c_all_off()
+            MyGPIO.i2c_write(6, False)
             myseq.reset()
 
 # ------------------------------------------------------------------------------
@@ -314,8 +314,8 @@ if __name__ == "__main__":
         #print("WS2812 -> Setup")
         MyWS2812.setup_ws2812()
         ### Test ###
-        #print("WS2812 -> Run self test")
-        #MyWS2812.self_test()
+        print("WS2812 -> Run self test")
+        MyWS2812.self_test()
         #print("WS2812 -> Blink Test")
         #MyWS2812.do_blink_test()
         #print("WS2812 -> Dot-Test")
