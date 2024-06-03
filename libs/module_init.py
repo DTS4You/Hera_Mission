@@ -1,5 +1,6 @@
 # #############################################################################
 # ### MyGlobal
+# ### V 1.01
 # #############################################################################
 
 
@@ -22,8 +23,8 @@ class Global_WS2812:
 
     seg_01_strip        = 0             #  1. Seg -> Stripe      # Einschlagbahn
     seg_01_start        = 0             #  1. Seg -> Start
-    #seg_01_count        = 32            #  1. Seg -> Anzahl
-    seg_01_count        = 30            #  Debug -> 1. Seg -> Anzahl
+    seg_01_count        = 32            #  1. Seg -> Anzahl
+    #seg_01_count        = 30            #  Debug -> 1. Seg -> Anzahl
 
     seg_02_strip        = 0             #  2. Seg -> Stripe      # Splitter
     seg_02_start        = 32            #  2. Seg -> Start
